@@ -3,4 +3,5 @@ members = [
     "services/auth",
     "services/posts",
     "packages/shared",
+    "services/gateway",
 ]
