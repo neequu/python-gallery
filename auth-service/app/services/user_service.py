@@ -1,7 +1,6 @@
 from app.core.security import hash_password
 from app.models.user import User
 from app.schemas.user import UserCreate
-from pydantic import EmailStr
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 

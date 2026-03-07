@@ -10,5 +10,6 @@ dependencies = [
     "asyncpg",
     "pydantic[email]>=2.12.5",
     "pydantic-settings>=2.12.0",
-    "passlib[bcrypt]",
+    "passlib[bcrypt]>=1.7.4",
+    "alembic>=1.18.4",
 ]
