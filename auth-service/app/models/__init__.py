@@ -1,3 +1,3 @@
-__all__ = ["User"]  # Note the square brackets - this is a list
+__all__ = ["User"]
 
 from .user import User
