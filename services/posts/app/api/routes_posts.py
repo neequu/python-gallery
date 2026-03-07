@@ -3,16 +3,21 @@ from app.schemas.post import PostCreate, PostResponse
 from app.services.post_service import PostService
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import Depends
+from app.dependencies.auth import get_current_user_id
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 
 
-@router.post("/", response_model=PostResponse)
+@router.post("/")
 async def create_post(
     data: PostCreate,
+    user_id: int = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db),
 ):
-    return await PostService.create_post(db, data)
+    data.user_id = user_id
+
+    return await PostService.create_post(db, data)  
 
 
 @router.get("/", response_model=list[PostResponse])

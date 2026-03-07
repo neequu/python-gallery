@@ -16,14 +16,14 @@ def create_access_token(*, user_id: int) -> str:
     }
 
     return jwt.encode(
-        payload, SECRET algorithm=ALGORITHM
+        payload, SECRET, algorithm=ALGORITHM
     )
 
 
 def decode_access_token(token: str) -> int:
     try:
         payload = jwt.decode(
-            token, settings.jwt_secret_key, algorithms=[settings.jwt_algorithm]
+            token, SECRET, algorithms=[ALGORITHM]
         )
         user_id: str | None = payload.get("sub")
         if user_id is None:

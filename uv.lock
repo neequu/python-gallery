@@ -383,11 +383,12 @@ wheels = [
 [[package]]
 name = "gateway"
 version = "0.1.0"
-source = { virtual = "services/gateway" }
+source = { editable = "services/gateway" }
 dependencies = [
     { name = "fastapi" },
     { name = "httpx" },
     { name = "pydantic-settings" },
+    { name = "shared" },
     { name = "uvicorn" },
 ]
 
@@ -396,6 +397,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.135.1" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "pydantic-settings", specifier = ">=2.13.1" },
+    { name = "shared", editable = "packages/shared" },
     { name = "uvicorn", specifier = ">=0.41.0" },
 ]
 
