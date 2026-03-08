@@ -6,9 +6,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 class PostService:
     @staticmethod
-    async def create_post(db: AsyncSession, data: PostCreate):
+    async def create_post(db: AsyncSession, data: PostCreate, user_id: int):
+        post_data = data.model_dump()
+        post_data["user_id"] = user_id
 
-        post = Post(**data.model_dump())
+        post = Post(**post_data)
 
         db.add(post)
         await db.commit()

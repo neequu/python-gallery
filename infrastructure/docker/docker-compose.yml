@@ -43,9 +43,12 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
 
 
 volumes:
   auth_postgres_data:
   posts_postgres_data:
   comments_postgres_data:
+  redis_data:

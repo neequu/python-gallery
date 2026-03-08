@@ -4,7 +4,6 @@ from pydantic import BaseModel
 class PostCreate(BaseModel):
     caption: str
     image_url: str
-    user_id: int
 
 
 class PostResponse(BaseModel):

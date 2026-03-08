@@ -1,8 +1,6 @@
-import asyncio
 import json
 
 import redis.asyncio as redis
-
 from app.events.handlers import handle_event
 
 
@@ -15,7 +13,6 @@ async def start_event_consumer():
     await pubsub.subscribe("users")
 
     async for message in pubsub.listen():
-
         if message["type"] != "message":
             continue
 

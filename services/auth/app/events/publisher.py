@@ -1,10 +1,8 @@
 import redis.asyncio as redis
-
 from app.events.schemas import UserEmailUpdatedEvent
 
 
 class EventPublisher:
-
     def __init__(self):
 
         self.redis = redis.Redis(

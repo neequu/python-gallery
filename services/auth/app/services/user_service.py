@@ -1,15 +1,14 @@
 from app.core.security import hash_password
+from app.events.publisher import EventPublisher
 from app.models.user import User
 from app.schemas.user import UserCreate
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
-from services.auth.app.events.publisher import EventPublisher
 
 
 class UserService:
-    
     publisher = EventPublisher()
-    
+
     @staticmethod
     async def create_user(db: AsyncSession, data: UserCreate) -> User:
 
@@ -32,8 +31,6 @@ class UserService:
         result = await db.execute(stmt)
 
         return result.scalar_one_or_none()
-    
-    
 
     @staticmethod
     async def update_email(
@@ -43,10 +40,7 @@ class UserService:
     ):
 
         stmt = (
-            update(User)
-            .where(User.id == user_id)
-            .values(email=email)
-            .returning(User)
+            update(User).where(User.id == user_id).values(email=email).returning(User)
         )
 
         result = await db.execute(stmt)
