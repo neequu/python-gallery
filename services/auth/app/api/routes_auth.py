@@ -4,6 +4,7 @@ from app.services.user_service import UserService
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.schemas.auth import LoginRequest, TokenResponse
+from app.schemas.user_update import UserEmailUpdate
 from shared.security.jwt import create_access_token
 from app.core.security import verify_password
 
@@ -34,3 +35,25 @@ async def login(data: LoginRequest, db: AsyncSession = Depends(get_db)):
     token = create_access_token(user_id=user.id)
 
     return TokenResponse(access_token=token)
+
+
+@router.put("/email/{user_id}")
+async def update_email(
+    user_id: int,
+    data: UserEmailUpdate,
+    db: AsyncSession = Depends(get_db),
+):
+
+    user = await UserService.update_email(
+        db,
+        user_id,
+        data.email,
+    )
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    return {
+        "id": user.id,
+        "email": user.email
+    }
